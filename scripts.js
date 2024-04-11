@@ -6,6 +6,10 @@ let display = 0;
 let displayText = document.querySelector('#display');
 init();
 
+//Todo: make the names and responsibilities of "display" vs "displayText" consistent.
+//This should be legible in the code and redundant assignments should be removed.
+
+//Todo 2: clean up code (don't take too long on this... as per odin proj recommendations)
 
 function init() {
     displayText.textContent = display;
@@ -25,7 +29,7 @@ function init() {
         op.addEventListener('click', () => {
 
             if (operator) {
-                display = operate(Number(a),Number(displayText.textContent),operator);
+                display = operate(a, displayText.textContent, operator);
                 displayText.textContent = display;                   
             }
 
@@ -40,9 +44,11 @@ function init() {
     //equals button
     const eqBtn = document.querySelector('#evaluate');
     eqBtn.addEventListener('click', () => {
-            display = operate(Number(a),Number(displayText.textContent),operator);
-            displayText.textContent = display;
-            operator = '';
+            if (operator) {
+                display = operate(a, displayText.textContent, operator);
+                displayText.textContent = display;
+                operator = '';
+            }
     });
 
     //clr button
@@ -58,19 +64,19 @@ function init() {
 }
 
 function add(a, b) {
-    return a + b;
+    return Number(a) + Number(b);
 }
 
 function subtract(a, b) {
-    return a - b;
+    return Number(a) - Number(b);
 }
 
 function multiply(a, b) {
-    return a * b;
+    return Number(a) * Number(b);
 }
 
 function divide(a, b) {
-    return a / b;
+    return Number(a) / Number(b);
 }
 
 function operate(a, b, operator) {
