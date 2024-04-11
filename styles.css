@@ -1,0 +1,23 @@
+/* make sure you understand the layout... */
+#calculator {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex: 1;
+}
+
+button {
+    flex: 1;
+}
+
+#display {
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    flex: 1 0 auto;
+}
