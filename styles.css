@@ -1,23 +1,81 @@
 /* make sure you understand the layout... */
+/* add coloring when buttons are pressed. */
+/* how to adjust the top to get it to display the way you want?? */
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 #calculator {
+    padding: 20px;
     width: 300px;
-    height: 300px;
+    height: 400px;
     display: flex;
     flex-direction: column;
+    gap: 12px;
+    background-color: rgb(0, 0, 50);
+    border-radius: 6px;
 }
+
+
 
 .row {
     display: flex;
     flex: 1;
+    gap: 8px;
 }
 
 button {
     flex: 1;
+    font-size: larger;
+    background-color: rgb(38, 38, 154);
+    color: white;
+    border: 0px;
+    border-radius: 10px;
+}
+
+button:active {
+    filter:brightness(80%);
+}
+
+.operator, #evaluate {
+    background-color: rgb(63, 166, 255);
+}
+
+.num, .decimal {
+    color: black;
+    background-color: whitesmoke;
+}
+
+
+
+#toprow {
+    flex-grow: 3;
+    background-color: aliceblue;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+#header {
+    flex: 1;
+    color:rgb(38, 38, 154);
+    font-weight: 100;
 }
 
 #display {
+    font-size: x-large;
     border-style: solid;
     border-width: 1px;
     border-color: black;
-    flex: 1 0 auto;
+    padding-left: 8px;
+    padding-right: 8px;
+    flex: 1 1 auto;
+    color: black;
+    background-color: rgb(165, 179, 165);
+    text-align: right;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
 }
+
