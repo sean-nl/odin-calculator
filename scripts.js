@@ -24,7 +24,6 @@ function init() {
         if (num.textContent === '0') {
             num.addEventListener('click', () => {
                 if (display.textContent !== '0') {
-                    console.log('determining current val...');
                     currentVal = ( (currentVal === 0 || resetInput === true) && (display.textContent !== '.') ) ? num.textContent : trimToLen(String(currentVal).concat(num.textContent),OVERFLOW_LIMIT);
                     resetInput = false;
                     display.textContent = currentVal;
@@ -46,8 +45,6 @@ function init() {
     for (const op of operatorBtns) {
         op.addEventListener('click', () => {
             if (operator) {
-                console.log('is it numeric?');
-                console.log(isNumeric(currentVal));
                 currentVal = operate(a, display.textContent, operator);
                 isNumeric(currentVal) ? display.textContent = roundToDecimal(currentVal, DECIMAL_PLACES) : display.textContent = currentVal;            
             }
@@ -73,7 +70,7 @@ function init() {
     //Decimal button
     const decBtn = document.querySelector('#decimal');
     decBtn.addEventListener('click', () => {
-        currentVal = resetInput ? '0.' : String(currentVal).concat('.');
+        currentVal = resetInput ? '0.' : currentVal.concat('.');
         display.textContent = currentVal;
         resetInput = false;
         decBtn.disabled = true;
@@ -90,6 +87,17 @@ function init() {
         decBtn.disabled = false;
     });
 
+
+    const delBtn = document.querySelector('#del');
+    delBtn.addEventListener('click', () => {
+        if (display.textContent !== '0') {
+            currentVal = display.textContent.slice(0,-1);
+            if (currentVal.length === 0) {
+                currentVal = 0;
+            }
+            display.textContent = currentVal;
+        }
+    });
 }
 
 function roundToDecimal(x,d) {

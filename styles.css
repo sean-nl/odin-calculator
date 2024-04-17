@@ -26,7 +26,7 @@
 
 button {
     flex: 1;
-    font-size: larger;
+    font-size: large;
     background-color: rgb(38, 38, 154);
     color: white;
     border: 0px;
@@ -41,7 +41,7 @@ button:active {
     background-color: rgb(63, 166, 255);
 }
 
-.num, .decimal {
+.num, #decimal {
     color: black;
     background-color: whitesmoke;
 }
@@ -64,7 +64,7 @@ button:active {
 }
 
 #display {
-    font-size: x-large;
+    font-size: large;
     border-style: solid;
     border-width: 1px;
     border-color: black;
