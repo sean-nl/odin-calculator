@@ -4,6 +4,7 @@ let operator;
 let currentVal = 0;
 let resetInput = true; // if true, the next number input will replace the current number being displayed.
 const DECIMAL_PLACES = 6;
+const OVERFLOW_LIMIT = 8; //amount of characters thatn can be input
 
 let display = document.querySelector('#display');
 init();
@@ -25,20 +26,21 @@ function init() {
         //Otherwise, update the currentval and display it.
         if (num.textContent === '0') {
             num.addEventListener('click', () => {
-                if (display.textContent !== '0') {
+                if (display.textContent !== '0' && display.textContent.length <= OVERFLOW_LIMIT) {
                     console.log('determining current val...');
                     currentVal = ( (currentVal === 0 || resetInput === true) && (display.textContent !== '.') ) ? num.textContent : String(currentVal).concat(num.textContent);
                     resetInput = false;
                     display.textContent = currentVal;
-                    // display.textContent = roundToDecimal(currentVal, DECIMAL_PLACES);
                 }
             });
         }
         else {
             num.addEventListener('click', () => {
-                currentVal = ( (currentVal === 0 || resetInput === true) && (display.textContent !== '.') ) ? num.textContent : String(currentVal).concat(num.textContent);
-                resetInput = false;
-                display.textContent = currentVal;
+                if (display.textContent.length <= OVERFLOW_LIMIT) {
+                    currentVal = ( (currentVal === 0 || resetInput === true) && (display.textContent !== '.') ) ? num.textContent : String(currentVal).concat(num.textContent);
+                    resetInput = false;
+                    display.textContent = currentVal;
+                }
             });
         }
 
