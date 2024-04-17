@@ -9,9 +9,6 @@ const OVERFLOW_LIMIT = 8; //amount of characters thatn can be input
 let display = document.querySelector('#display');
 init();
 
-
-//Bug: can't do 0.000000
-
 //Todo 3: clean up code (don't take too long on this... as per odin proj recommendations)
 //probbably can use resetinput intelligently and simplify the number button event listeners.
 
@@ -26,9 +23,9 @@ function init() {
         //Otherwise, update the currentval and display it.
         if (num.textContent === '0') {
             num.addEventListener('click', () => {
-                if (display.textContent !== '0' && display.textContent.length <= OVERFLOW_LIMIT) {
+                if (display.textContent !== '0') {
                     console.log('determining current val...');
-                    currentVal = ( (currentVal === 0 || resetInput === true) && (display.textContent !== '.') ) ? num.textContent : String(currentVal).concat(num.textContent);
+                    currentVal = ( (currentVal === 0 || resetInput === true) && (display.textContent !== '.') ) ? num.textContent : trimToLen(String(currentVal).concat(num.textContent),OVERFLOW_LIMIT);
                     resetInput = false;
                     display.textContent = currentVal;
                 }
@@ -36,11 +33,9 @@ function init() {
         }
         else {
             num.addEventListener('click', () => {
-                if (display.textContent.length <= OVERFLOW_LIMIT) {
-                    currentVal = ( (currentVal === 0 || resetInput === true) && (display.textContent !== '.') ) ? num.textContent : String(currentVal).concat(num.textContent);
-                    resetInput = false;
-                    display.textContent = currentVal;
-                }
+                currentVal = ( (currentVal === 0 || resetInput === true) && (display.textContent !== '.') ) ? num.textContent : trimToLen(String(currentVal).concat(num.textContent),OVERFLOW_LIMIT);
+                resetInput = false;
+                display.textContent = currentVal;
             });
         }
 
@@ -51,6 +46,8 @@ function init() {
     for (const op of operatorBtns) {
         op.addEventListener('click', () => {
             if (operator) {
+                console.log('is it numeric?');
+                console.log(isNumeric(currentVal));
                 currentVal = operate(a, display.textContent, operator);
                 isNumeric(currentVal) ? display.textContent = roundToDecimal(currentVal, DECIMAL_PLACES) : display.textContent = currentVal;            
             }
@@ -136,4 +133,8 @@ function operate(a, b, operator) {
 //reference: https://stackoverflow.com/questions/175739/how-can-i-check-if-a-string-is-a-valid-number
 function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+function trimToLen(s, n) {
+    return s.substring(0,n);
 }
