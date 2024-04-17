@@ -56,6 +56,7 @@ function init() {
             operator = op.textContent;
             a = currentVal;
             currentVal = 0;
+            decBtn.disabled = false;
         });
     }
 
@@ -70,7 +71,13 @@ function init() {
             }
     });
 
-    
+    //Decimal button
+    const decBtn = document.querySelector('#decimal');
+    decBtn.addEventListener('click', () => {
+        currentVal = String(currentVal).concat('.');
+        display.textContent = currentVal;
+        decBtn.disabled = true;
+    });
 
     //Clr button
     const clrBtn = document.querySelector('#clr');
@@ -80,6 +87,7 @@ function init() {
         operator = '';
         a = 0;
         b = 0;
+        decBtn.disabled = false;
     });
 
 }
