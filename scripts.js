@@ -8,11 +8,8 @@ const DECIMAL_PLACES = 6;
 let display = document.querySelector('#display');
 init();
 
-//Todo 2.0: display error when dividing by 0. DONE.
 
-//Todo 3: the operator reset issue
-//once "equal" has been hit, pressing more buttons does not reset the display, but adds more vals.
-//this to be fixed.
+//Bug: can't do 0.000000
 
 //Todo 3: clean up code (don't take too long on this... as per odin proj recommendations)
 //probbably can use resetinput intelligently and simplify the number button event listeners.
@@ -28,18 +25,20 @@ function init() {
         //Otherwise, update the currentval and display it.
         if (num.textContent === '0') {
             num.addEventListener('click', () => {
-                if (Number(display.textContent) !== 0) {
-                    currentVal = ( currentVal === 0 ) ? num.textContent : Number(String(currentVal).concat(num.textContent));
+                if (display.textContent !== '0') {
+                    console.log('determining current val...');
+                    currentVal = ( (currentVal === 0 || resetInput === true) && (display.textContent !== '.') ) ? num.textContent : String(currentVal).concat(num.textContent);
                     resetInput = false;
-                    display.textContent = roundToDecimal(currentVal, DECIMAL_PLACES);
+                    display.textContent = currentVal;
+                    // display.textContent = roundToDecimal(currentVal, DECIMAL_PLACES);
                 }
             });
         }
         else {
             num.addEventListener('click', () => {
-                currentVal = ( currentVal === 0 || resetInput === true) ? num.textContent : Number(String(currentVal).concat(num.textContent));
+                currentVal = ( (currentVal === 0 || resetInput === true) && (display.textContent !== '.') ) ? num.textContent : String(currentVal).concat(num.textContent);
                 resetInput = false;
-                display.textContent = roundToDecimal(currentVal, DECIMAL_PLACES);
+                display.textContent = currentVal;
             });
         }
 
@@ -68,14 +67,16 @@ function init() {
                 isNumeric(currentVal) ? display.textContent = roundToDecimal(currentVal, DECIMAL_PLACES) : display.textContent = currentVal;
                 operator = '';
                 resetInput = true;
+                decBtn.disabled = false;
             }
     });
 
     //Decimal button
     const decBtn = document.querySelector('#decimal');
     decBtn.addEventListener('click', () => {
-        currentVal = String(currentVal).concat('.');
+        currentVal = resetInput ? '0.' : String(currentVal).concat('.');
         display.textContent = currentVal;
+        resetInput = false;
         decBtn.disabled = true;
     });
 
