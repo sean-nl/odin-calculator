@@ -100,6 +100,15 @@ function init() {
             display.textContent = currentVal;
         }
     });
+
+    //Negative button
+    const negBtn = document.querySelector('#neg');
+    negBtn.addEventListener('click', () => {
+        if (display.textContent !== '0' && isNumeric(display.textContent)) {
+            currentVal *= -1;
+            display.textContent = currentVal;
+        }
+    });
 }
 
 function roundToDecimal(x,d) {
@@ -127,6 +136,10 @@ function divide(a, b) {
     }
 }
 
+function power(a, b) {
+        return Math.pow(Number(a),Number(b));
+}
+
 function operate(a, b, operator) {
     switch (operator) { //operator is assumed to be string
         case "+":
@@ -137,6 +150,8 @@ function operate(a, b, operator) {
             return multiply(a,b);
         case "/":
             return divide(a,b);
+        case "xy":
+            return power(a,b);
     }
 }
 
