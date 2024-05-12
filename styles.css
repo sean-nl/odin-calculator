@@ -44,8 +44,6 @@ button:active {
     background-color: whitesmoke;
 }
 
-
-
 #toprow {
     flex-grow: 3;
     background-color: aliceblue;

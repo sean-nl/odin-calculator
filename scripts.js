@@ -9,11 +9,6 @@ const OVERFLOW_LIMIT = 10; //amount of characters that can be input
 let display = document.querySelector('#display');
 init();
 
-//Todo 1: Add negative and sqrt
-
-//Todo 2: clean up code (don't take too long on this... as per odin proj recommendations)
-//probbably can use resetinput intelligently and simplify the number button event listeners.
-
 function init() {
     display.textContent = 0;
     
