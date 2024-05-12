@@ -3,13 +3,15 @@ let b = 0;
 let operator;
 let currentVal = 0;
 let resetInput = true; // if true, the next number input will replace the current number being displayed.
-const DECIMAL_PLACES = 6;
-const OVERFLOW_LIMIT = 8; //amount of characters thatn can be input
+const DECIMAL_PLACES = 8;
+const OVERFLOW_LIMIT = 10; //amount of characters that can be input
 
 let display = document.querySelector('#display');
 init();
 
-//Todo 3: clean up code (don't take too long on this... as per odin proj recommendations)
+//Todo 1: Add negative and sqrt
+
+//Todo 2: clean up code (don't take too long on this... as per odin proj recommendations)
 //probbably can use resetinput intelligently and simplify the number button event listeners.
 
 function init() {
@@ -87,10 +89,10 @@ function init() {
         decBtn.disabled = false;
     });
 
-
+    //Del button
     const delBtn = document.querySelector('#del');
     delBtn.addEventListener('click', () => {
-        if (display.textContent !== '0') {
+        if (display.textContent !== '0' && isNumeric(display.textContent)) {
             currentVal = display.textContent.slice(0,-1);
             if (currentVal.length === 0) {
                 currentVal = 0;
