@@ -16,15 +16,13 @@
     border-radius: 6px;
 }
 
-
-
 .row {
     display: flex;
     flex: 1;
     gap: 8px;
 }
 
-button {
+button, #pow {
     flex: 1;
     font-size: large;
     background-color: rgb(38, 38, 154);
